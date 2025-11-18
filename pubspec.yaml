@@ -1,0 +1,39 @@
+name: demo
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+#
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.0
+
+#
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.0       # Quản lý trạng thái
+  http: ^1.1.0           # Gọi API
+  sqflite: ^2.3.0        # Database cục bộ
+  path: ^1.8.3           # Xử lý đường dẫn file DB
+  shared_preferences: ^2.2.0
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  #
+  flutter_lints: ^6.0.0
+
+#
+flutter:
+  assets:
+    - assets/books/
+
+  #
+  uses-material-design: true
+
+
