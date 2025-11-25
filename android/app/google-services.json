@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "757835389047",
+    "project_id": "chiaseanh2",
+    "storage_bucket": "chiaseanh2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757835389047:android:a8106ae5fcd40d485c4e72",
+        "android_client_info": {
+          "package_name": "com.example.demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCoAvkhWcBu85YwSfXDeUYdYLgwETjuLM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

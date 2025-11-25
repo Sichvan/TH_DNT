@@ -1,36 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-
-// Import các file từ thư mục con
-import 'providers/providers.dart';
+import 'providers/user_provider.dart';
+import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => SettingsProvider()),
-        ChangeNotifierProvider(create: (_) => BookProvider()),
-      ],
-      child: const MyApp(),
-    ),
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Khởi tạo Firebase (Nhớ chạy flutterfire configure trước)
+  await Firebase.initializeApp(
+     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    // Lắng nghe thay đổi theme từ SettingsProvider
-    final settings = Provider.of<SettingsProvider>(context);
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: MaterialApp(
+        title: 'School App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Colors.grey[50],
+          useMaterial3: true,
+        ),
+        home: AuthWrapper(),
+      ),
+    );
+  }
+}
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'E-Book Reader',
-      // Tự động đổi giao diện Sáng/Tối
-      theme: settings.isDarkMode ? ThemeData.dark() : ThemeData.light(),
-      home: const HomeScreen(),
+// Widget điều hướng: Đã đăng nhập -> Home, Chưa -> Login
+class AuthWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<UserProvider>(
+      builder: (context, userProvider, child) {
+        if (userProvider.user != null) {
+          return HomeScreen();
+        }
+        return LoginScreen();
+      },
     );
   }
 }
